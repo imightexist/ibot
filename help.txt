@@ -1,0 +1,16 @@
+tagcreate (name,value) - creates tag
+tag (name) - sends value of tag
+echo (string) - repeats string
+whoami - sends username
+test - hello world
+github - github page
+online - sends site that could turn on bot
+about - about bot
+amogus - sends real
+hash - sends hash to verify trusted
+
+Trusted commands:
+eval (hash,string) - runs string in javascript
+restart (hash) - restarts bot
+ban (username,hash) - bans user from bot use
+unban (username,hash) - unbans user from bot use
