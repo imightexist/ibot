@@ -4,7 +4,6 @@ echo (string) - repeats string
 whoami - sends username
 test - hello world
 github - github page
-online - sends site that could turn on bot
 about - about bot
 amogus - sends real
 hash - sends hash to verify trusted
