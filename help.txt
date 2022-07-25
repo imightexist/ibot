@@ -10,6 +10,6 @@ hash - sends hash to verify trusted
 
 Trusted commands:
 eval (hash,string) - runs string in javascript
-restart (hash) - restarts bot
+stop (hash) - stops bot
 ban (hash,username) - bans user from bot use
 unban (hash,username) - unbans user from bot use
