@@ -8,6 +8,10 @@ about - about bot
 truth - sends truth about jjjj
 hash - sends hash to verify trusted
 insult (string) - username is so yummy yummy yummy yummy fat fat fat
+say (string) - repeats string
+rockpaperscissors - no need to explain this
+lowercase (string) - converts string to lowercase
+uppercase (string) - converts string to uppercase
 
 Trusted commands:
 eval (hash,string) - runs string in javascript
