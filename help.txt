@@ -5,7 +5,7 @@ whoami - sends username
 test - hello world
 github - github page
 about - about bot
-amogus - sends real
+truth - sends truth about jjjj
 hash - sends hash to verify trusted
 
 Trusted commands:
