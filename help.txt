@@ -15,6 +15,8 @@ uppercase (string) - converts string to uppercase
 option1 - votes option1 of poll
 option2 - votes option2 of poll
 votekick (username) - vote for kicking a person
+votekickyes - votes yes
+votekickno - votes no
 
 Trusted commands:
 eval (hash,string) - runs string in javascript
