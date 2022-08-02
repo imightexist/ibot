@@ -24,4 +24,4 @@ stop (hash) - stops bot
 ban (hash,username) - bans user from bot use
 unban (hash,username) - unbans user from bot use
 poll (hash,question) - starts a poll
-vmban (username) - only for vms that the bot has moderation perms on
+vmban (username) - only for vms that the bot has moderation perms on (cannot be undone!)
