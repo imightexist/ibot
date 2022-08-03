@@ -14,9 +14,6 @@ lowercase (string) - converts string to lowercase
 uppercase (string) - converts string to uppercase
 option1 - votes option1 of poll
 option2 - votes option2 of poll
-votekick (username) - vote for kicking a person
-votekickyes - votes yes
-votekickno - votes no
 
 Trusted commands:
 eval (hash,string) - runs string in javascript
@@ -24,4 +21,9 @@ stop (hash) - stops bot
 ban (hash,username) - bans user from bot use
 unban (hash,username) - unbans user from bot use
 poll (hash,question) - starts a poll
-vmban (username) - only for vms that the bot has moderation perms on (cannot be undone!)
+
+DankVM exclusives:
+vmban (hash,username) - only for vms that the bot has moderation perms on (cannot be undone unless you restart the bot)
+votekick (username) - vote for kicking a person
+votekickyes - votes yes
+votekickno - votes no
