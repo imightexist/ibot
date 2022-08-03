@@ -23,7 +23,7 @@ unban (hash,username) - unbans user from bot use
 poll (hash,question) - starts a poll
 
 DankVM exclusives:
-vmban (hash,username) - bans username cannot be undone unless you restart the bot
+vmban (hash,username) - bans username (cannot be undone unless you restart the bot)
 votekick (username) - vote for kicking a person
 votekickyes - votes yes
 votekickno - votes no
