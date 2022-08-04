@@ -6,7 +6,7 @@ var vm2 = new vm2lib.VM({ allowAsync: false });
 var ws = new WebSocketClient();
 var vm = 'computernewb.com/collab-vm/vm7';
 var discord = require('discord.js');
-const token = 'ODUyNjY2MDc4Mzc4NTkwMjE5.GfibaM.WC9wwnoZbbc5M-yDDuxsxr1bVRNkIqLZ4rlfMY';
+const token = 'insert here'; //lol i put my actual bot token here but i changed it so dont go peeking in the commits again
 const client = new discord.Client({
   intents: ["GUILDS", "GUILD_MESSAGES"],
 });
