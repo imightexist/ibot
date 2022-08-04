@@ -14,6 +14,8 @@ lowercase (string) - converts string to lowercase
 uppercase (string) - converts string to uppercase
 option1 - votes option1 of poll
 option2 - votes option2 of poll
+whatthehell - WHAT THE HELL
+impersonate (username) - renamed to username and says "Hi, I'm username!"
 
 Trusted commands:
 eval (hash,string) - runs string in javascript
@@ -27,3 +29,5 @@ vmban (hash,username) - bans username (cannot be undone unless you restart the b
 votekick (username) - vote for kicking a person
 votekickyes - votes yes
 votekickno - votes no
+
+some commands might not be in source code
