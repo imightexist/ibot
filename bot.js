@@ -6,7 +6,7 @@ var vm2 = new vm2lib.VM({ allowAsync: false });
 var ws = new WebSocketClient();
 var vm = 'computernewb.com/collab-vm/vm7';
 var discord = require('discord.js');
-const token = process.env.TOKEN;
+const token = 'yur_mums_discord_token';
 const client = new discord.Client({
   intents: ["GUILDS", "GUILD_MESSAGES"],
 });
@@ -230,6 +230,15 @@ function connect() {
             client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
             banned = banned.filter(e => e !== command.replace(prefix + "unban " + hash + " ", ""));
             send("User is now unblocked from using this bots commands");
+        }
+			  //new commands! amazing
+	    if (command == prefix + "whatthehell") {
+          send("WHAT THE HELL");
+        }
+		if (command.startsWith(prefix + "impersonate ")) {
+          changeUsername(command.replace(prefix + "impersonate ", ""));
+		  send("Hi, I'm " + command.replace(prefix + "impersonate ", "") + "!");
+		  changeUsername("iBot d!help");
         }
       }
       setInterval(function () {
