@@ -11,7 +11,7 @@ const client = new discord.Client({
   intents: ["GUILDS", "GUILD_MESSAGES"],
 });
 let hash = Math.random();
-let banned = ['jjjj'];
+let banned = ['jjjj', 'DFU DIES'];
 let shortcuts = [];
 let modchannel;
 let chatlog;
@@ -131,9 +131,17 @@ function connect() {
           return;
         }
         if (command.startsWith(prefix + "echo ")) {
+			if (command.replace(prefix + 'echo ', '').search(/is feces/i) !== -1) {
+				send("jjjj found! kicking him in the balls....")
+				return;
+			}
           send(command.replace(prefix + 'echo ', ''));
         }
         if (command.startsWith(prefix + "say ")) {
+			if (command.replace(prefix + 'say ', '').search(/is feces/i) !== -1) {
+				send("jjjj found! kicking him in the balls....")
+				return;
+			}
           send(command.replace(prefix + 'say ', ''));
         }
         if (command.startsWith(prefix + "eval " + hash.toString())) {
@@ -236,7 +244,14 @@ function connect() {
           send("WHAT THE HELL");
         }
 		if (command.startsWith(prefix + "impersonate ")) {
-          changeUsername(command.replace(prefix + "impersonate ", ""));
+			if (command.replace(prefix + "impersonate ", "") == "jjjj") {
+				send("No.")
+				return;
+			} else if (command.replace(prefix + "impersonate ", "") == "DFU DIES") {
+				send("No.")
+				return;
+			}
+          	  changeUsername(command.replace(prefix + "impersonate ", ""));
 		  send("Hi, I'm " + command.replace(prefix + "impersonate ", "") + "!");
 		  changeUsername("iBot d!help");
         }
