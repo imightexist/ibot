@@ -18,6 +18,7 @@ whatthehell - WHAT THE HELL
 impersonate (username) - renamed to username and says "Hi, I'm username!" (for renaming the username has to not be taken)
 pointscreate - creates points account
 points - lists your points
+pointstransfer (username) - transfers one point
 
 Trusted commands:
 eval (hash,string) - runs string in javascript
@@ -27,6 +28,7 @@ unban (hash,username) - unbans user from bot use
 poll (hash,question) - starts a poll
 pointsadd (hash,username) - adds 1 point
 pointsremove (hash,username) - subtracts 1 point
+pointsreset (hash,username) - resets points for username
 
 DankVM exclusives:
 vmban (hash,username) - bans username (cannot be undone unless you restart the bot)
