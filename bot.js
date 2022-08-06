@@ -311,8 +311,6 @@ function connect() {
               a[1] -= 1
             }
           });
-          hash = Math.random();
-          client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
         }
         if (command == prefix + "votekickyes") {
           if (votekickyes.includes(username)) {
