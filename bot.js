@@ -4,10 +4,10 @@ var fs = require('fs')
 var vm2lib = require('vm2')
 var vm2 = new vm2lib.VM({ allowAsync: false });
 var ws = new WebSocketClient();
-var vm = 'computernewb.com/collab-vm/vm7';
+var vm = '173.208.172.26:6004';
 var discord = require('discord.js');
 const { encode } = require('punycode');
-const token = "iexists discord token";
+const token = "token here";
 const client = new discord.Client({
   intents: ["GUILDS", "GUILD_MESSAGES"],
 });
@@ -17,7 +17,7 @@ let shortcuts = [];
 let votekickyes = [];
 let votekickno = [];
 let points = [];
-const modpass = "OMG I FOUND MOD PASS REAL"
+const modpass = ""
 let modchannel;
 let chatlog;
 const prefix = "d!";
@@ -290,6 +290,30 @@ function connect() {
           hash = Math.random();
           client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
         }
+        if (command.startsWith(prefix + "pointsreset " + hash + " ")) {
+          user = command.replace(prefix + "pointsremove " + hash + " ", "")
+          points.forEach(function (a) {
+            if (a[0] == user) {
+              a[1] = 0
+            }
+          });
+          hash = Math.random();
+          client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
+        }
+        if (command.startsWith(prefix + "pointstransfer ")) {
+          user = command.replace(prefix + "pointstransfer ", "")
+          points.forEach(function (a) {
+            if (a[0] == user) {
+              a[1] += 1
+              send("Points transferred");
+            }
+            if (a[0] == username) {
+              a[1] -= 1
+            }
+          });
+          hash = Math.random();
+          client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
+        }
         if (command == prefix + "votekickyes") {
           if (votekickyes.includes(username)) {
             return;
@@ -416,5 +440,4 @@ function encodeCommand(cypher) {
   return command;
 }
 connect();
-ws.connect('wss://' + vm, 'guacamole');
-ws.connect('ws://173.208.172.26:6004', 'guacamole');
+ws.connect('ws://' + vm, 'guacamole');
