@@ -328,6 +328,29 @@ function connect() {
           hash = Math.random();
           client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
         }
+        			  //new commands! amazing
+	    if (command == prefix + "whatthehell") {
+          send("WHAT THE HELL");
+        }
+		if (command.startsWith(prefix + "impersonate ")) {
+			if (command.replace(prefix + "impersonate ", "") == "jjjj") {
+				send("No.")
+				return;
+			} else if (command.replace(prefix + "impersonate ", "") == "DFU DIES") {
+				send("No.")
+				return;
+			}
+          changeUsername(command.replace(prefix + "impersonate ", ""));
+		  send("Hi, I'm " + command.replace(prefix + "impersonate ", "") + "!");
+		  changeUsername("iBot d!help");
+        }
+		if (command.startsWith(prefix + "hashtest ")) {
+          if (command.replace(prefix + "hashtest ", "") == hash) {
+		  send("You just won the game")
+		} else {
+			send("You just lost the game")
+		}
+        }
       }
       setInterval(function () {
         if (f.connected) {
