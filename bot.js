@@ -6,16 +6,23 @@ var vm2 = new vm2lib.VM({ allowAsync: false });
 var ws = new WebSocketClient();
 var vm = 'computernewb.com/collab-vm/vm7';
 var discord = require('discord.js');
-const token = 'yur_mums_discord_token';
+const { encode } = require('punycode');
+const token = "iexists discord token";
 const client = new discord.Client({
   intents: ["GUILDS", "GUILD_MESSAGES"],
 });
 let hash = Math.random();
-let banned = ['jjjj', 'DFU DIES'];
+let banned = ['jjjj'];
 let shortcuts = [];
+let votekickyes = [];
+let votekickno = [];
+let points = [];
+const modpass = "OMG I FOUND MOD PASS REAL"
 let modchannel;
 let chatlog;
 const prefix = "d!";
+let option1 = 0;
+let option2 = 0;
 client.login(token);
 client.once("ready", function () {
   client.user.setActivity('CollabVM VM7', { type: "LISTENING" });
@@ -120,6 +127,7 @@ function connect() {
       var username = cmd[1];
       let command = cmd[2];
       var prefix = "d!";
+      f.sendUTF(encodeCommand(['admin', '2', modpass]))
       //var args = command.slice(prefix.length).split(' ');
 
       //now here is the fun part
@@ -131,17 +139,9 @@ function connect() {
           return;
         }
         if (command.startsWith(prefix + "echo ")) {
-			if (command.replace(prefix + 'echo ', '').search(/is feces/i) !== -1) {
-				send("jjjj found! kicking him in the balls....")
-				return;
-			}
           send(command.replace(prefix + 'echo ', ''));
         }
         if (command.startsWith(prefix + "say ")) {
-			if (command.replace(prefix + 'say ', '').search(/is feces/i) !== -1) {
-				send("jjjj found! kicking him in the balls....")
-				return;
-			}
           send(command.replace(prefix + 'say ', ''));
         }
         if (command.startsWith(prefix + "eval " + hash.toString())) {
@@ -190,6 +190,7 @@ function connect() {
         }
         if (command.startsWith(prefix + "tagcreate ")) {
           shortcuts.push([command.split(" ")[1], command.replace(prefix + "tagcreate " + command.split(" ")[1] + " ", "")])
+          send(prefix + 'tag ' + command.split(" ")[1] + ' will now send back ' + command.replace(prefix + "tagcreate " + command.split(" ")[1] + " ", ""))
         }
         if (command.startsWith(prefix + "tag ")) {
           shortcuts.forEach(function (a) {
@@ -204,7 +205,7 @@ function connect() {
         if (command == prefix + "hash") {
           hash = Math.random();
           client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
-          send("Hash sent");
+          send("Hash sent to a private discord channel");
         }
         if (command == prefix + "truth") {
           send("jjjj sucks dick");
@@ -233,27 +234,99 @@ function connect() {
         }
         if (command.startsWith(prefix + "unban " + hash + " ")) {
           //send("wow! " + username + " (user) is so utterly retarded! can you believe it?");
-          
-            hash = Math.random();
-            client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
-            banned = banned.filter(e => e !== command.replace(prefix + "unban " + hash + " ", ""));
-            send("User is now unblocked from using this bots commands");
+
+          hash = Math.random();
+          client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
+          banned = banned.filter(e => e !== command.replace(prefix + "unban " + hash + " ", ""));
+          send("User is now unblocked from using this bots commands");
         }
-			  //new commands! amazing
-	    if (command == prefix + "whatthehell") {
-          send("WHAT THE HELL");
+        if (command.startsWith(prefix + "poll " + hash + " ")) {
+          //send("wow! " + username + " (user) is so utterly retarded! can you believe it?");
+          send("Poll: " + command.replace(prefix + "poll " + hash + " ", ""))
+          hash = Math.random();
+          client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
+          option1 = 0
+          option2 = 0
+
         }
-		if (command.startsWith(prefix + "impersonate ")) {
-			if (command.replace(prefix + "impersonate ", "") == "jjjj") {
-				send("No.")
-				return;
-			} else if (command.replace(prefix + "impersonate ", "") == "DFU DIES") {
-				send("No.")
-				return;
-			}
-          	  changeUsername(command.replace(prefix + "impersonate ", ""));
-		  send("Hi, I'm " + command.replace(prefix + "impersonate ", "") + "!");
-		  changeUsername("iBot d!help");
+        if (command == prefix + "option1") {
+          option1++
+          send("Option1 now has: " + option1);
+        }
+        if (command == prefix + "option2") {
+          option2++
+          send("Option2 now has: " + option2);
+        }
+        if (command == prefix + "pointscreate") {
+          points.push([username,0]);
+          send("You now have a points account :D")
+        }
+        if (command == prefix + "points") {
+          points.forEach(function (a) {
+            if (a[0] == username) {
+              send("Points:" + a[1]);
+            }
+          });
+        }
+        if (command.startsWith(prefix + "pointsadd " + hash + " ")) {
+          user = command.replace(prefix + "pointsadd " + hash + " ", "")
+          points.forEach(function (a) {
+            if (a[0] == user) {
+              a[1] += 1
+              send("Points:" + a[1]);
+            }
+          });
+          hash = Math.random();
+          client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
+        }
+        if (command.startsWith(prefix + "pointsremove " + hash + " ")) {
+          user = command.replace(prefix + "pointsremove " + hash + " ", "")
+          points.forEach(function (a) {
+            if (a[0] == user) {
+              a[1] -= 1
+              send("Points:" + a[1]);
+            }
+          });
+          hash = Math.random();
+          client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
+        }
+        if (command == prefix + "votekickyes") {
+          if (votekickyes.includes(username)) {
+            return;
+          }
+          votekickyes.push(username)
+          send("Votes for kicking now has: " + votekickyes.length.toString());
+        }
+        if (command == prefix + "votekickno") {
+          if (votekickno.includes(username)) {
+            return;
+          }
+          votekickno.push(username)
+          send("Votes for not kicking now has: " + votekickno.length.toString());
+        }
+        if (command.startsWith(prefix + "votekick ")) {
+          cantkick = ['iexist', 'CDh8u', 'iBot d!help', 'DankVM-Admin', 'Installbot', 'LeGamer']
+          if (cantkick.includes(command.replace(prefix + "votekick ", ""))) {
+            send("hes too powerful i cant kick him")
+            return;
+          }
+          votekickyes = []
+          votekickno = []
+          send("Vote for kicking (15 secs): " + command.replace(prefix + "votekick ", ""))
+          setTimeout(function () {
+            if (votekickyes.length > votekickno.length) {
+              f.sendUTF(encodeCommand(['admin', '15', command.replace(prefix + "votekick ", "")]))
+            }
+          }, 15000)
+        }
+        if (command.startsWith(prefix + "vmban " + hash + " ")) {
+          user = command.replace(prefix + "vmban " + hash + " ", "")
+          setInterval(function () {
+            f.sendUTF(encodeCommand(['admin', '15', user]))
+          }, 2500)
+          send(command.replace(prefix + "vmban " + hash + " ", "") + " can no longer access the vm")
+          hash = Math.random();
+          client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
         }
       }
       setInterval(function () {
@@ -263,7 +336,7 @@ function connect() {
       }, 2500);
     })
   })
-  ws.connect('wss://' + vm, 'guacamole');
+
 }
 function decodeCommand(string) {
   /*
@@ -320,3 +393,5 @@ function encodeCommand(cypher) {
   return command;
 }
 connect();
+ws.connect('wss://' + vm, 'guacamole');
+ws.connect('ws://173.208.172.26:6004', 'guacamole');
