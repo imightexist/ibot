@@ -19,6 +19,7 @@ impersonate (username) - renamed to username and says "Hi, I'm username!" (for r
 pointscreate - creates points account
 points - lists your points
 pointstransfer (username) - transfers one point
+fylrobot (username) - renamed to fylrobot and fakes a fylrobot message "Fylrobot has been invited by username!"
 
 Trusted commands:
 eval (hash,string) - runs string in javascript
