@@ -350,29 +350,45 @@ function connect() {
           hash = Math.random();
           client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
         }
-        			  //new commands! amazing
-	    if (command == prefix + "whatthehell") {
+        //new commands! amazing
+	 if (command == prefix + "whatthehell") {
           send("WHAT THE HELL");
         }
-		if (command.startsWith(prefix + "impersonate ")) {
-			if (command.replace(prefix + "impersonate ", "") == "jjjj") {
-				send("No.")
-				return;
-			} else if (command.replace(prefix + "impersonate ", "") == "DFU DIES") {
-				send("No.")
-				return;
-			}
+	if (command.startsWith(prefix + "impersonate ")) {
+		if (command.replace(prefix + "impersonate ", "") == "jjjj") {
+			send("No.")
+			return;
+		} else if (command.replace(prefix + "impersonate ", "") == "DFU DIES") {
+			send("No.")
+			return;
+		}
           changeUsername(command.replace(prefix + "impersonate ", ""));
-		  send("Hi, I'm " + command.replace(prefix + "impersonate ", "") + "!");
-		  changeUsername("iBot d!help");
+	  send("Hi, I'm " + command.replace(prefix + "impersonate ", "") + "!");
+	  changeUsername("iBot d!help");
         }
-		if (command.startsWith(prefix + "hashtest ")) {
+	if (command.startsWith(prefix + "hashtest ")) {
           if (command.replace(prefix + "hashtest ", "") == hash) {
 		  send("You just won the game")
 		} else {
 			send("You just lost the game")
 		}
         }
+	if (command.startsWith(prefix + "fylrobot ")) {
+          changeUsername("Fylrobot");
+	  send("Fylrobot has been invited by @" + command.replace(prefix + "fylrobot ", "") + "!");
+	  changeUsername("iBot d!help");
+        }
+		/*if (command.startsWith(prefix + "changename " + hash + " ")) {
+          currentuser = command.replace(prefix + "changename " + hash + " ", "")
+          send("Name changed to " + currentuser)
+          hash = Math.random();
+		  changeUsername(toString(currentuser))
+          client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
+        }*/
+		/*if (command == prefix + "forcepointscreate " + hash + " ") {
+          points.push([command.replace(prefix + "forcepointscreate " + hash + " ", ""),0]);
+          send("Forced a points account for " + command.replace(prefix + "forcepointscreate " + hash + " ", ""))
+        }*/    
       }
       setInterval(function () {
         if (f.connected) {
