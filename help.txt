@@ -36,5 +36,6 @@ vmban (hash,username) - bans username (cannot be undone unless you restart the b
 votekick (username) - vote for kicking a person
 votekickyes - votes yes
 votekickno - votes no
+ipban (hash,username) - ip bans user
 
 some commands might not be in source code
