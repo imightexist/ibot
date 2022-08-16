@@ -20,8 +20,11 @@ pointscreate - creates points account
 points - lists your points
 pointstransfer (username) - transfers one point
 fylrobot (username) - renamed to fylrobot and fakes a fylrobot message "Fylrobot has been invited by username!"
-funny - sends a funny message (IF YOU ARE SETTING UP iBot YOU MUST CREATE funny.txt IN THE SAME FOLDER AS bot.js)
+funny - sends a funny message from other people on collabvm
 term - sends terminology
+addquote - unlinke tagcreate, this tag is permanent. adds a quote onto the main board (credits to fact teller for this one)
+quote - sends a random quote from the main board (credits to fact teller for this one again)
+dove - sends "No more date" (credits to fact teller for this one again)
 
 Trusted commands:
 eval (hash,string) - runs string in javascript
