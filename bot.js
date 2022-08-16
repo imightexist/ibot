@@ -407,6 +407,34 @@ function connect() {
           var fork = forks[Math.floor(Math.random()*forks.length)] + forks[Math.floor(Math.random()*forks.length)] + "fag";
 		  send(fork)
         }
+		//OMG FACT TELLER
+		if (command.startsWith(prefix + "addquote ")) {
+          fs.appendFile('main.txt', '\r\n' + command.replace(prefix + "addquote ", ""), function (err) {
+          if (err) return console.log(err);
+          send("Added to the main board")
+          });
+        }
+		if (command.startsWith(prefix + "quote")) {
+			const readFileLines = filename =>
+			fs
+			.readFileSync(filename)
+			.toString('UTF8')
+			.split('\r\n');
+			let mains = readFileLines('main.txt');
+			let mainno = Math.random()*mains.length
+			var main = mains[Math.floor(Math.random()*mains.length)]
+			send(main);
+			send("The text was " + parseInt(mainno) + " out of " + mains.length + " chosen");
+			mainno = Math.random()*mains.length
+        }
+		if (command.startsWith(prefix + "dove")) {
+			var months = ['January', 'February', 'March', 'April', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+			var month = months[Math.floor(Math.random()*months.length)]
+			var date = parseInt(Math.random()*31)
+			var year = parseInt(Math.random()*31+2000)
+			send("No more " + month + " " + date + ", " + year)
+        }
+		//no more fact teller
       }
       setInterval(function () {
         if (f.connected) {
