@@ -20,6 +20,8 @@ pointscreate - creates points account
 points - lists your points
 pointstransfer (username) - transfers one point
 fylrobot (username) - renamed to fylrobot and fakes a fylrobot message "Fylrobot has been invited by username!"
+funny - sends a funny message (IF YOU ARE SETTING UP iBot YOU MUST CREATE funny.txt IN THE SAME FOLDER AS bot.js)
+term - sends terminology
 
 Trusted commands:
 eval (hash,string) - runs string in javascript
