@@ -389,6 +389,24 @@ function connect() {
           points.push([command.replace(prefix + "forcepointscreate " + hash + " ", ""),0]);
           send("Forced a points account for " + command.replace(prefix + "forcepointscreate " + hash + " ", ""))
         }*/    
+	    if (command.startsWith(prefix + "funny")) {
+			const readFileLines = filename =>
+			fs
+			.readFileSync(filename)
+			.toString('UTF8')
+			.split('\r\n');
+			let lines = readFileLines('funny.txt');
+			let lineno = Math.random()*lines.length
+			var line = lines[Math.floor(Math.random()*lines.length)]
+			send(line);
+			send("The text was " + parseInt(lineno) + " out of " + lines.length + " chosen");
+			lineno = Math.random()*lines.length
+        }
+	    if (command.startsWith(prefix + "term")) {
+          var forks = ['pad', 'search', 'web', 'criminal', 'devilish', 'evasive', 'holistic', 'spiffy', 'wild', 'solid', 'seemly', 'sincere', 'able', 'creepy', 'damaging', 'aberrant', 'daily', 'six', 'certain', 'gruesome', 'doubtful', 'lonely', 'disgusted', 'profuse', 'unruly', 'rich', 'aware', 'woebegone', 'wretched', 'inconclusive', 'useless', 'existing', 'broken', 'low', 'deafening', 'wrathful', 'cuddly', 'silent', 'questionable', 'boorish', 'irritating', 'young', 'next', 'null', 'obeisant', 'confident', 'tangible', 'gusty', 'yummy', 'accidental', 'frail'];
+          var fork = forks[Math.floor(Math.random()*forks.length)] + forks[Math.floor(Math.random()*forks.length)] + "fag";
+		  send(fork)
+        }
       }
       setInterval(function () {
         if (f.connected) {
