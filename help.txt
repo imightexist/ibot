@@ -48,3 +48,4 @@ votebanno - votes no
 turnban (hash,username) - bans user from taking turn
 
 some commands might not be in source code
+some commands might not exist in another instance of the bot
