@@ -4,34 +4,51 @@ var fs = require('fs')
 var vm2lib = require('vm2')
 var vm2 = new vm2lib.VM({ allowAsync: false });
 var ws = new WebSocketClient();
-var vm = '173.208.172.26:6004';
+var vm = 'computernewb.com/collab-vm/vm0';
 var discord = require('discord.js');
 const { encode } = require('punycode');
-const token = "token here";
+const token = 'iexists discord token';
 const client = new discord.Client({
   intents: ["GUILDS", "GUILD_MESSAGES"],
 });
 let hash = Math.random();
-let banned = ['jjjj'];
+let banned = ['jjjj', 'DFU DIES', 'bbbb'];
+let bannedwords = ['!reboot', '!eject cd', '@']
 let shortcuts = [];
 let votekickyes = [];
 let votekickno = [];
 let points = [];
-const modpass = ""
+const mod = false
+const modpass = "OMG I FOUND MOD PASS REAL"
 let modchannel;
 let chatlog;
 const prefix = "d!";
 let option1 = 0;
 let option2 = 0;
+//let currentuser = "iBot d!help"
+let notify = null;
+let notifyuser = null;
+let notifyid = null;
+let notifyping = false;
+const safe = true;
 client.login(token);
 client.once("ready", function () {
-  client.user.setActivity('CollabVM VM7', { type: "LISTENING" });
+  client.user.setActivity('CollabVM VM0b0t', { type: "LISTENING" });
   console.log("started");
 });
-client.on("messageCreate", function command(message) {
+client.on("message", function command(message) {
   if (message.author.bot) return;
+  let content = message.content
+  if (message.channel.id == 1018853384230547577) {
+    if (content == "test") {
+      message.reply("Hello World!");
+  }}
   if (message.content.startsWith(prefix)) {
     let command = message.content.replace(prefix, '');
+	if (message.channel.id == 948316579643400255) {
+	message.reply("can only do that in <#1018853384230547577> or other channels sry")
+	return;
+  }
     if (command == "help") {
       fs.readFile("commands.txt", (err, data) => {
         if (err) return console.error(err);
@@ -74,7 +91,7 @@ client.on("messageCreate", function command(message) {
         }
     }*/
     if (command == "whoami") {
-      message.reply(message.author.username);
+      message.reply(toString(message.author));
     }
     if (command.startsWith("say ")) {
       message.reply(command.replace("say ", ""));
@@ -109,7 +126,70 @@ client.on("messageCreate", function command(message) {
     if (command == "ping") {
       message.reply(Date.now() - message.createdTimeStamp + "ms");
     }
-  }
+	if (command == "quote") {
+      const readFileLines = filename =>
+      fs
+      .readFileSync(filename)
+      .toString('UTF8')
+      .split('\r\n');
+      let mains = readFileLines('main.txt');
+      let mainno = Math.random()*mains.length
+      var main = mains[Math.floor(Math.random()*mains.length)]
+      message.reply(main);
+      message.reply("The text was " + parseInt(mainno) + " out of " + mains.length + " chosen");
+      mainno = Math.random()*mains.length
+	}
+    //if (command == "addquote") {
+    //  fs.appendFile('main.txt', '\r\n' + command.replace("addquote ", ""), function (err) {
+    //  if (err) return console.log(err);
+    //  message.reply("Added to the main board")
+	//}
+    if (command.startsWith("notify ")) {
+		if (notify !== null) {
+			message.reply("You'll have to wait, another notification is pending")
+			return;
+		}
+      notify = command.replace("notify ", "")
+	  notifyuser = message.author.username
+	  notifyid = message.author.id
+	  notifyping = true
+      message.reply("Notified the bot, you will be pinged when they open it");
+	  //message.reply(notify + " username:" + notifyuser + " password:" + notifyid + "passwords:<@" + notifyid + ">")
+    }
+	if (command == "stop" && message.guild.me.permissions.has("KICK_MEMBERS") && message.member.permissions.has("KICK_MEMBERS")) {
+		message.reply("Stopping")
+		setTimeout(function () {
+process.exit(1)
+          }, 3000)
+		//process.exit(1)
+	}
+	if (command == "funny") {
+      const readFileLines = filename =>
+      fs
+      .readFileSync(filename)
+      .toString('UTF8')
+      .split('\r\n');
+      let lines = readFileLines('funny.txt');
+      let lineno = Math.random()*lines.length
+      var line = lines[Math.floor(Math.random()*lines.length)]
+      message.reply(line);
+      message.reply("The text was " + parseInt(lineno) + " out of " + lines.length + " chosen");
+      lineno = Math.random()*lines.length
+	}
+	if (command == "reset" && safe == false && message.guild.me.permissions.has("KICK_MEMBERS") && message.member.permissions.has("KICK_MEMBERS")) {
+		if (notify == null) {
+			message.reply("Notify is null")
+			return;
+		}
+		notifyping = true
+		message.reply("Done")
+	}
+	
+	if (message.channel.id == 1018853384230547577) {
+      if (command == "ahh") {
+          message.reply("i agree yur dum")
+  }}}
+	
 });
 
 function connect() {
@@ -127,21 +207,39 @@ function connect() {
       var username = cmd[1];
       let command = cmd[2];
       var prefix = "d!";
-      f.sendUTF(encodeCommand(['admin', '2', modpass]))
+	  if (mod == true) {
+	  f.sendUTF(encodeCommand(['admin', '2', modpass]))
+	  }
       //var args = command.slice(prefix.length).split(' ');
 
       //now here is the fun part
       //fuck you stupid error
       if (cmd[0] == "chat") {
         console.log(cmd)
+		/*if (cmd[2].search(/@everyone/i) !== -1) {
+			client.channels.cache.get("1000826848948801636").send("[REDACTED]")
+			return;
+		} else if (cmd[2].search(/@here/i) !== -1)
+			client.channels.cache.get("1000826848948801636").send("[REDACTED]")
+			return;
+	}*/
         client.channels.cache.get("1000826848948801636").send(cmd[1] + ": " + cmd[2]);
-        if (username == "iBot d!help" || banned.includes(username)) {
+		console.log(cmd[2])
+        if (username == "iBot d!help" || 	banned.includes(username)) {
           return;
         }
         if (command.startsWith(prefix + "echo ")) {
+			if (command.replace(prefix + 'echo ', '').search(/is feces/i) !== -1) {
+				send("jjjj found! kicking him in the balls....")
+				return;
+			}
           send(command.replace(prefix + 'echo ', ''));
         }
         if (command.startsWith(prefix + "say ")) {
+			if (command.replace(prefix + 'say ', '').search(/is feces/i) !== -1) {
+				send("jjjj found! kicking him in the balls....")
+				return;
+			}
           send(command.replace(prefix + 'say ', ''));
         }
         if (command.startsWith(prefix + "eval " + hash.toString())) {
@@ -190,7 +288,7 @@ function connect() {
         }
         if (command.startsWith(prefix + "tagcreate ")) {
           shortcuts.push([command.split(" ")[1], command.replace(prefix + "tagcreate " + command.split(" ")[1] + " ", "")])
-          send(prefix + 'tag ' + command.split(" ")[1] + ' will now send back ' + command.replace(prefix + "tagcreate " + command.split(" ")[1] + " ", ""))
+		            send(prefix + 'tag ' + command.split(" ")[1] + ' will now send back ' + command.replace(prefix + "tagcreate " + command.split(" ")[1] + " ", ""))
         }
         if (command.startsWith(prefix + "tag ")) {
           shortcuts.forEach(function (a) {
@@ -234,13 +332,14 @@ function connect() {
         }
         if (command.startsWith(prefix + "unban " + hash + " ")) {
           //send("wow! " + username + " (user) is so utterly retarded! can you believe it?");
-
-          hash = Math.random();
-          client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
-          banned = banned.filter(e => e !== command.replace(prefix + "unban " + hash + " ", ""));
-          send("User is now unblocked from using this bots commands");
+          
+            hash = Math.random();
+            client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
+            banned = banned.filter(e => e !== command.replace(prefix + "unban " + hash + " ", ""));
+            send("User is now unblocked from using this bots commands");
         }
-        if (command.startsWith(prefix + "poll " + hash + " ")) {
+		//imported from iexist
+		if (command.startsWith(prefix + "poll " + hash + " ")) {
           //send("wow! " + username + " (user) is so utterly retarded! can you believe it?");
           send("Poll: " + command.replace(prefix + "poll " + hash + " ", ""))
           hash = Math.random();
@@ -290,7 +389,7 @@ function connect() {
           hash = Math.random();
           client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
         }
-        if (command.startsWith(prefix + "pointsreset " + hash + " ")) {
+		        if (command.startsWith(prefix + "pointsreset " + hash + " ")) {
           user = command.replace(prefix + "pointsremove " + hash + " ", "")
           points.forEach(function (a) {
             if (a[0] == user) {
@@ -312,21 +411,21 @@ function connect() {
             }
           });
         }
-        if (command == prefix + "votekickyes") {
+        if (command == prefix + "votekickyes" && mod == true) {
           if (votekickyes.includes(username)) {
             return;
           }
           votekickyes.push(username)
           send("Votes for kicking now has: " + votekickyes.length.toString());
         }
-        if (command == prefix + "votekickno") {
+        if (command == prefix + "votekickno" && mod == true) {
           if (votekickno.includes(username)) {
             return;
           }
           votekickno.push(username)
           send("Votes for not kicking now has: " + votekickno.length.toString());
         }
-        if (command.startsWith(prefix + "votekick ")) {
+        if (command.startsWith(prefix + "votekick ") && mod == true) {
           cantkick = ['iexist', 'CDh8u', 'iBot d!help', 'DankVM-Admin', 'Installbot', 'LeGamer']
           if (cantkick.includes(command.replace(prefix + "votekick ", ""))) {
             send("hes too powerful i cant kick him")
@@ -341,7 +440,7 @@ function connect() {
             }
           }, 15000)
         }
-        if (command.startsWith(prefix + "vmban " + hash + " ")) {
+        if (command.startsWith(prefix + "vmban " + hash + " ") && mod == true) {
           user = command.replace(prefix + "vmban " + hash + " ", "")
           setInterval(function () {
             f.sendUTF(encodeCommand(['admin', '15', user]))
@@ -350,33 +449,33 @@ function connect() {
           hash = Math.random();
           client.channels.cache.get("948457042333544458").send("Hash: " + hash.toString());
         }
-        //new commands! amazing
-	 if (command == prefix + "whatthehell") {
+			  //new commands! amazing
+	    if (command == prefix + "whatthehell") {
           send("WHAT THE HELL");
         }
-	if (command.startsWith(prefix + "impersonate ")) {
-		if (command.replace(prefix + "impersonate ", "") == "jjjj") {
-			send("No.")
-			return;
-		} else if (command.replace(prefix + "impersonate ", "") == "DFU DIES") {
-			send("No.")
-			return;
-		}
+		if (command.startsWith(prefix + "impersonate ")) {
+			if (command.replace(prefix + "impersonate ", "") == "jjjj") {
+				send("No.")
+				return;
+			} else if (command.replace(prefix + "impersonate ", "") == "DFU DIES") {
+				send("No.")
+				return;
+			}
           changeUsername(command.replace(prefix + "impersonate ", ""));
-	  send("Hi, I'm " + command.replace(prefix + "impersonate ", "") + "!");
-	  changeUsername("iBot d!help");
+		  send("Hi, I'm " + command.replace(prefix + "impersonate ", "") + "!");
+		  changeUsername("iBot d!help");
         }
-	if (command.startsWith(prefix + "hashtest ")) {
+		if (command.startsWith(prefix + "hashtest ")) {
           if (command.replace(prefix + "hashtest ", "") == hash) {
 		  send("You just won the game")
 		} else {
 			send("You just lost the game")
 		}
         }
-	if (command.startsWith(prefix + "fylrobot ")) {
+		if (command.startsWith(prefix + "fylrobot ")) {
           changeUsername("Fylrobot");
-	  send("Fylrobot has been invited by @" + command.replace(prefix + "fylrobot ", "") + "!");
-	  changeUsername("iBot d!help");
+		  send("Fylrobot has been invited by @" + command.replace(prefix + "fylrobot ", "") + "!");
+		  changeUsername("iBot d!help");
         }
 		/*if (command.startsWith(prefix + "changename " + hash + " ")) {
           currentuser = command.replace(prefix + "changename " + hash + " ", "")
@@ -388,7 +487,7 @@ function connect() {
 		/*if (command == prefix + "forcepointscreate " + hash + " ") {
           points.push([command.replace(prefix + "forcepointscreate " + hash + " ", ""),0]);
           send("Forced a points account for " + command.replace(prefix + "forcepointscreate " + hash + " ", ""))
-        }*/    
+        }*/
 	    if (command.startsWith(prefix + "funny")) {
 			const readFileLines = filename =>
 			fs
@@ -435,7 +534,18 @@ function connect() {
 			send("No more " + month + " " + date + ", " + year)
         }
 		//no more fact teller
-      }
+		if (command.startsWith(prefix + "notification")) {
+			if (notify == null) {
+				send("No notifications")
+			}
+			send(notify)
+			send("Sent from " + notifyuser + " (" + notifyid + ")")
+			notify = null
+        }
+		if (command.search(/cums on/i) !== -1 && safe == false) {
+			send("???")
+		}
+	  }
       setInterval(function () {
         if (f.connected) {
           f.sendUTF('3.nop;');
@@ -443,7 +553,7 @@ function connect() {
       }, 2500);
     })
   })
-
+  ws.connect('wss://' + vm, 'guacamole');
 }
 function decodeCommand(string) {
   /*
@@ -500,4 +610,3 @@ function encodeCommand(cypher) {
   return command;
 }
 connect();
-ws.connect('ws://' + vm, 'guacamole');
