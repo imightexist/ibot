@@ -25,6 +25,7 @@ term - sends terminology
 addquote - unlinke tagcreate, this tag is permanent. adds a quote onto the main board (credits to fact teller for this one)
 quote - sends a random quote from the main board (credits to fact teller for this one again)
 dove - sends "No more date" (credits to fact teller for this one again)
+notification - check sayings from people in the discord
 
 Trusted commands:
 eval (hash,string) - runs string in javascript
@@ -37,6 +38,11 @@ pointsremove (hash,username) - subtracts 1 point
 pointsreset (hash,username) - resets points for username
 
 DankVM exclusives:
+ __  ______  __  __  ________   _  ________  __  __________  ________ __________  ____  _  __  ______   ____  ___
+ \ \/ / __ \/ / / / / ___/ _ | / |/ /_  __/ / / / / __/ __/ /_  __/ // /  _/ __/ / __ \/ |/ / / ___/ | / /  |/  /
+  \  / /_/ / /_/ / / /__/ __ |/    / / /   / /_/ /\ \/ _/    / / / _  // /_\ \  / /_/ /    / / /__ | |/ / /|_/ / 
+  /_/\____/\____/  \___/_/ |_/_/|_/ /_/    \____/___/___/   /_/ /_//_/___/___/  \____/_/|_/  \___/ |___/_/  /_/  
+So don't. You can only use these on DankVM.
 vmban (hash,username) - bans username (cannot be undone unless you restart the bot)
 votekick (username) - vote for kicking a person
 votekickyes - votes yes
